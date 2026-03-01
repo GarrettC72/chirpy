@@ -21,9 +21,9 @@ func main() {
 	fsHandler := apiConfig.middlewareMetricsInc(http.FileServer(http.Dir(filepathRoot)))
 	mux.Handle("/app/", http.StripPrefix("/app", fsHandler))
 
-	mux.HandleFunc("GET /healthz", handlerReadiness)
-	mux.HandleFunc("GET /metrics", apiConfig.handlerMetrics)
-	mux.HandleFunc("POST /reset", apiConfig.handlerReset)
+	mux.HandleFunc("GET /api/healthz", handlerReadiness)
+	mux.HandleFunc("GET /admin/metrics", apiConfig.handlerMetrics)
+	mux.HandleFunc("POST /admin/reset", apiConfig.handlerReset)
 
 	server := &http.Server{
 		Handler: mux,
